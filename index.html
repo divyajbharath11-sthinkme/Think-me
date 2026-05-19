@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,67 +10,255 @@
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
 body{
-    background:#080808;
-    color:white;
-    height:100vh;
-    display:flex;
-    flex-direction:column;
+background:#0a0a0a;
+color:white;
+height:100vh;
+display:flex;
+flex-direction:column;
 }
 
-/* HEADER */
-
 header{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-    padding:18px;
-    background:#111;
-    border-bottom:1px solid #222;
+background:#111;
+padding:15px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+border-bottom:1px solid #222;
 }
 
 .logo{
-    width:52px;
-    height:52px;
-    border-radius:18px;
-    background:linear-gradient(135deg,#00d4ff,#6f00ff);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    box-shadow:0 0 20px rgba(0,212,255,0.5);
+width:50px;
+height:50px;
+border-radius:15px;
+background:linear-gradient(135deg,#00d4ff,#6f00ff);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
 }
 
 .title{
-    font-size:28px;
-    font-weight:bold;
+font-size:28px;
+font-weight:bold;
 }
-
-/* CHAT AREA */
 
 .chat-container{
-    flex:1;
-    overflow-y:auto;
-    padding:15px;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
+flex:1;
+overflow-y:auto;
+padding:15px;
+display:flex;
+flex-direction:column;
+gap:12px;
 }
 
-/* MESSAGE */
-
 .message{
-    max-width:85%;
-    padding:14px;
-    border-radius:18px;
-    font-size:16px;
-    line-height:1.5;
-    animation:fadeIn 0.3s ease;
-    word-wrap:
+padding:14px;
+border-radius:16px;
+max-width:80%;
+font-size:16px;
+line-height:1.5;
+word-wrap:break-word;
+}
+
+.bot{
+background:#1d1d1d;
+align-self:flex-start;
+}
+
+.user{
+background:#00c6ff;
+color:black;
+font-weight:bold;
+align-self:flex-end;
+}
+
+.input-area{
+display:flex;
+padding:10px;
+gap:10px;
+background:#111;
+border-top:1px solid #222;
+}
+
+.input-area input{
+flex:1;
+padding:14px;
+border:none;
+outline:none;
+border-radius:12px;
+background:#1d1d1d;
+color:white;
+font-size:16px;
+}
+
+.input-area button{
+padding:14px 18px;
+border:none;
+border-radius:12px;
+background:white;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+footer{
+text-align:center;
+padding:6px;
+font-size:12px;
+color:gray;
+background:#111;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+🧠
+</div>
+
+<div class="title">
+ThinkMe AI
+</div>
+
+</header>
+
+<div class="chat-container" id="chatContainer">
+
+<div class="message bot">
+👋 Hello! I am ThinkMe AI.<br>
+Ask me anything.
+</div>
+
+</div>
+
+<div class="input-area">
+
+<input
+type="text"
+id="userInput"
+placeholder="Type your message..."
+>
+
+<button onclick="sendMessage()">
+➤
+</button>
+
+</div>
+
+<footer>
+ThinkMe AI © 2025
+</footer>
+
+<script>
+
+const chatContainer =
+document.getElementById("chatContainer");
+
+const userInput =
+document.getElementById("userInput");
+
+function addMessage(text, sender){
+
+let message =
+document.createElement("div");
+
+message.classList.add("message");
+
+message.classList.add(sender);
+
+message.innerHTML = text;
+
+chatContainer.appendChild(message);
+
+chatContainer.scrollTop =
+chatContainer.scrollHeight;
+}
+
+function getReply(text){
+
+text = text.toLowerCase();
+
+if(text.includes("hi") ||
+text.includes("hello")){
+
+return "👋 Hello! How are you?";
+}
+
+else if(text.includes("job")){
+
+return "💼 A job is work done to earn money.";
+}
+
+else if(text.includes("business")){
+
+return "📈 Online business and AI business are growing fast in India.";
+}
+
+else if(text.includes("india")){
+
+return "🇮🇳 India is a fast-growing technology country.";
+}
+
+else if(text.includes("ai")){
+
+return "🤖 AI means Artificial Intelligence.";
+}
+
+else{
+
+return "✨ Sorry, I am still learning.";
+}
+
+}
+
+function sendMessage(){
+
+let text = userInput.value.trim();
+
+if(text === ""){
+return;
+}
+
+addMessage(text, "user");
+
+userInput.value = "";
+
+setTimeout(function(){
+
+let reply = getReply(text);
+
+addMessage(reply, "bot");
+
+}, 800);
+
+}
+
+userInput.addEventListener(
+"keypress",
+function(event){
+
+if(event.key === "Enter"){
+
+sendMessage();
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
