@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThinkMe AI</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#0d0d0d;
+    color:white;
+}
+
+header{
+    padding:20px;
+    text-align:center;
+    font-size:35px;
+    font-weight:bold;
+    background:black;
+    border-bottom:1px solid #222;
+}
+
+.container{
+    padding:20px;
+}
+
+.chat-box{
+    background:#161616;
+    height:350px;
+    border-radius:15px;
+    padding:15px;
+    overflow-y:auto;
+    margin-bottom:20px;
+    border:1px solid #333;
+}
+
+.message{
+    background:#262626;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+.input-area{
+    display:flex;
+    gap:10px;
+}
+
+input{
+    flex:1;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#1e1e1e;
+    color:white;
+}
+
+button{
+    padding:15px 20px;
+    border:none;
+    border-radius:10px;
+    background:white;
+    color:black;
+    font-weight:bold;
+}
+
+.subscription{
+    margin-top:40px;
+    background:#161616;
+    padding:20px;
+    border-radius:15px;
+    border:1px solid #333;
+    text-align:center;
+}
+
+.price{
+    font-size:40px;
+    margin:20px 0;
+}
+
+.buy-btn{
+    background:lime;
+    color:black;
+    width:100%;
+}
+
+.features{
+    text-align:left;
+    margin-top:20px;
+}
+
+.features p{
+    color:#bbb;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    color:gray;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+ThinkMe AI
+</header>
+
+<div class="container">
+
+<div class="chat-box" id="chatBox">
+<div class="message">
+Hello 👋 Welcome to ThinkMe AI.
+</div>
+</div>
+
+<div class="input-area">
+<input type="text" id="userInput" placeholder="Ask anything...">
+<button onclick="sendMessage()">Send</button>
+</div>
+
+<div class="subscription">
+
+<h2>ThinkMe Premium</h2>
+
+<div class="price">
+₹300/month
+</div>
+
+<button class="buy-btn">
+Buy Subscription
+</button>
+
+<div class="features">
+<p>✅ Unlimited AI Chats</p>
+<p>✅ Fast Responses</p>
+<p>✅ Smart AI Understanding</p>
+<p>✅ Premium Features</p>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+ThinkMe AI © 2026
+</footer>
+
+<script>
+
+function sendMessage(){
+
+let input=document.getElementById("userInput");
+
+let chatBox=document.getElementById("chatBox");
+
+if(input.value.trim()!=""){
+
+let userMessage=document.createElement("div");
+
+userMessage.className="message";
+
+userMessage.innerHTML="🧑 You: "+input.value;
+
+chatBox.appendChild(userMessage);
+
+let botMessage=document.createElement("div");
+
+botMessage.className="message";
+
+botMessage.innerHTML="🤖 ThinkMe AI: I am still learning.";
+
+chatBox.appendChild(botMessage);
+
+input.value="";
+
+chatBox.scrollTop=chatBox.scrollHeight;
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
