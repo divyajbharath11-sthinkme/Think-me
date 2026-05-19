@@ -1,145 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ThinkMe AI</title>
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
 }
 
 body{
-background:#080808;
-color:white;
-height:100vh;
-display:flex;
-flex-direction:column;
+    background:#080808;
+    color:white;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
 }
 
+/* HEADER */
+
 header{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:12px;
-padding:18px;
-background:#111;
-border-bottom:1px solid #222;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    padding:18px;
+    background:#111;
+    border-bottom:1px solid #222;
 }
 
 .logo{
-width:48px;
-height:48px;
-border-radius:16px;
-background:linear-gradient(135deg,#00d4ff,#6f00ff);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:26px;
-box-shadow:0 0 20px rgba(0,212,255,0.5);
+    width:52px;
+    height:52px;
+    border-radius:18px;
+    background:linear-gradient(135deg,#00d4ff,#6f00ff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    box-shadow:0 0 20px rgba(0,212,255,0.5);
 }
 
 .title{
-font-size:30px;
-font-weight:bold;
-letter-spacing:1px;
+    font-size:28px;
+    font-weight:bold;
+    letter-spacing:1px;
 }
+
+/* CHAT AREA */
 
 .chat-container{
-flex:1;
-overflow-y:auto;
-padding:15px;
-display:flex;
-flex-direction:column;
-gap:14px;
+    flex:1;
+    overflow-y:auto;
+    padding:15px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
 }
+
+/* MESSAGE */
 
 .message{
-max-width:85%;
-padding:14px;
-border-radius:18px;
-font-size:16px;
-line-height:1.5;
-animation:fadeIn 0.3s ease;
-word-wrap:break-word;
+    max-width:85%;
+    padding:14px;
+    border-radius:18px;
+    font-size:16px;
+    line-height:1.5;
+    animation:fadeIn 0.3s ease;
+    word-wrap:break-word;
 }
+
+/* USER MESSAGE */
 
 .user{
-align-self:flex-end;
-background:#2563eb;
+    align-self:flex-end;
+    background:#2563eb;
+    color:white;
 }
+
+/* BOT MESSAGE */
 
 .bot{
-align-self:flex-start;
-background:#1d1d1d;
+    align-self:flex-start;
+    background:#1d1d1d;
+    color:white;
 }
 
-.typing{
-opacity:0.7;
-font-style:italic;
-}
+/* INPUT AREA */
 
 .input-area{
-display:flex;
-gap:8px;
-padding:12px;
-background:#111;
-border-top:1px solid #222;
+    display:flex;
+    gap:10px;
+    padding:12px;
+    background:#111;
+    border-top:1px solid #222;
 }
 
-input{
-flex:1;
-padding:14px;
-border:none;
-outline:none;
-border-radius:14px;
-background:#1b1b1b;
-color:white;
-font-size:16px;
+.input-area input{
+    flex:1;
+    padding:14px;
+    border:none;
+    outline:none;
+    border-radius:14px;
+    background:#1b1b1b;
+    color:white;
+    font-size:16px;
 }
 
-button{
-border:none;
-padding:12px 14px;
-border-radius:14px;
-background:white;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
+.input-area button{
+    border:none;
+    padding:12px 18px;
+    border-radius:14px;
+    background:white;
+    color:black;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-button:active{
-transform:scale(0.95);
+.input-area button:active{
+    transform:scale(0.95);
 }
 
-.image-preview{
-max-width:220px;
-border-radius:14px;
-margin-top:10px;
-}
+/* FOOTER */
 
 footer{
-text-align:center;
-padding:8px;
-font-size:12px;
-color:gray;
-background:#111;
+    text-align:center;
+    padding:8px;
+    font-size:12px;
+    color:gray;
+    background:#111;
 }
 
+/* ANIMATION */
+
 @keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(10px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 </style>
@@ -147,15 +159,21 @@ transform:translateY(0);
 
 <body>
 
+<!-- HEADER -->
+
 <header>
 
-<div class="logo">🧠</div>
+<div class="logo">
+🧠
+</div>
 
 <div class="title">
 ThinkMe AI
 </div>
 
 </header>
+
+<!-- CHAT AREA -->
 
 <div class="chat-container" id="chatContainer">
 
@@ -166,7 +184,94 @@ Ask me anything.
 
 </div>
 
+<!-- INPUT AREA -->
+
 <div class="input-area">
 
 <input
 type="text"
+id="userInput"
+placeholder="Type your message..."
+onkeypress="handleKey(event)"
+>
+
+<button onclick="sendMessage()">
+➤
+</button>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+ThinkMe AI © 2025
+</footer>
+
+<!-- SCRIPT -->
+
+<script>
+
+const chatContainer = document.getElementById("chatContainer");
+
+function addMessage(text, sender){
+
+    const message = document.createElement("div");
+
+    message.classList.add("message");
+    message.classList.add(sender);
+
+    message.innerHTML = text;
+
+    chatContainer.appendChild(message);
+
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+function sendMessage(){
+
+    const input = document.getElementById("userInput");
+
+    const text = input.value.trim();
+
+    if(text === ""){
+        return;
+    }
+
+    // USER MESSAGE
+
+    addMessage(text, "user");
+
+    input.value = "";
+
+    // BOT THINKING
+
+    setTimeout(() => {
+
+        addMessage("🤖 Thinking...", "bot");
+
+    }, 500);
+
+    // BOT REPLY
+
+    setTimeout(() => {
+
+        const messages = document.querySelectorAll(".bot");
+
+        messages[messages.length - 1].innerHTML =
+        "✨ You said: " + text;
+
+    }, 1500);
+}
+
+function handleKey(event){
+
+    if(event.key === "Enter"){
+
+        sendMessage();
+    }
+}
+
+</script>
+
+</body>
+</html>
